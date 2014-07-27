@@ -1,8 +1,8 @@
 * UBX example
   UNDER CONSTRUCTION
 ** Install ubx and ubx_cmake
-   0. Look at the [[https://github.com/UbxTeam/microblx][ubx readme]] to find out which dependencies there and install them on your system.
-   1. Install [[https://github.com/UbxTeam/microblx][ubx]].
+   - Look at the [[https://github.com/UbxTeam/microblx][ubx readme]] to find out which dependencies there and install them on your system.
+   - Install [[https://github.com/UbxTeam/microblx][ubx]].
    #+BEGIN_EXAMPLE
    $ git clone https://github.com/UbxTeam/microblx.git
    #+END_EXAMPLE
@@ -11,7 +11,7 @@
    $ cd microblx
    microblx$ git checkout dev
    #+END_EXAMPLE
-   2. Install [[https://github.com/haianos/microblx_cmake][ubx_cmake]].
+   - Install [[https://github.com/haianos/microblx_cmake][ubx_cmake]].
    #+BEGIN_EXAMPLE
    $ git clone https://github.com/haianos/microblx_cmake.git
    #+END_EXAMPLE
@@ -20,7 +20,7 @@
    $ cd microblx_cmake
    microblx_cmake$ git checkout dev
    #+END_EXAMPLE
-   3. Write a sourceme.sh file for yourself
+   - Write a sourceme.sh file for yourself
       
 ** Generate the package
 #+BEGIN_EXAMPLE
