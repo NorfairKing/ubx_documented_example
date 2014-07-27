@@ -51,7 +51,13 @@
 
 ** Making a package
    The process of making a package consists of the following steps.
-*** Design the model for the ubx package.
+   1. Design the model for the ubx package.
+   2. Design the model for the blocks.
+   3. Generate the package.
+   4. Implement the types
+   5. Implement the blocks
+   6. Building with cmake
+*** Designing the package model.
     A package contains a set of blocks types.
 
     To design the package model, write a package model ('.pkg') file.
@@ -110,3 +116,9 @@ return pkg
 #+END_EXAMPLE
     Note the comma's at the end of each item in a list.
     The last item can also have such a comma.
+    
+** Creating an ubx system composition
+COMING SOON
+*** Designing the composition
+*** Creating a launch script
+*** Launch the application
