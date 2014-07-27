@@ -19,6 +19,5 @@ return block
       },
       
       operations = { start=true, stop=true, step=true },
-      
-      cpp=false
+
 }
