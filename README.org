@@ -56,10 +56,57 @@
 
     To design the package model, write a package model ('.pkg') file.
     Example:
+
 #+BEGIN_EXAMPLE
 $ cat example_pkg.pkg
+return pkg
+{
+  -- The name of the package
+  name="example",
+  
+  -- The path to >TODO<
+  path="../",
+      
+  -- The dependencies of the package
+  -- These could be dependencies on other packages, blocks, types or libraries
+  dependencies = {
+    -- name: the name of the dependecy
+    -- type:
+    --   |- cmake: >TODO<
+    --   >TODO<
+    --
+    { name="kdl-types", type="cmake" },
+  },
+  
+  -- The types that are used in the package
+  -- All types have to be declared, not only custom types. >TODO<
+  -- >TODO< {Is it the name of the directory, a relative path or an absolute path?}
+  types = {
+    -- name: The name of the type
+    -- dir: The directory in which the type is declared
+    { name="my_type", dir="types" },
+    { name="vector", dir="types" },
+    { name="robot_data", dir="types" },
+  },
+  
+  -- The blocks that are defined in the package
+  blocks = {
+    -- name: The name of the block
+    -- file: The file in which the block is declared
+    -- src_dir: The source directory in which the code will be generated.
+    -- >TODO< {Is it the name of the directory, a relative path or an absolute path?}
+    { name="myblock", file="examples/example_block.blx", src_dir="src" },
+    { name="myblock2", file="examples/example_block2.blx", src_dir="src2" },
+  },
+  
+  -- The modules that the package provides
+  modules = {
+    -- name: The name of the module
+    -- blocks: The names of the blocks in the module
+    { name="mylib", blocks={"myblock"} },
+    { name="anotherlib", blocks={"myblock2"} } ,
+  },
+}
 #+END_EXAMPLE
-#+INCLUDE: "example_pkg.pkg"
-
-   TODO
-   
+    Note the comma's at the end of each item in a list.
+    The last item can also have such a comma.
