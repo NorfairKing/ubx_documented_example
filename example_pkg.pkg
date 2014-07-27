@@ -1,0 +1,25 @@
+return pkg
+{
+  name="microblx_new_pkg",
+  path="../",
+      
+  dependencies = {
+    { name="kdl-types", type="cmake" },
+  },
+  
+  types = {
+    { name="my_type", dir="types" },
+    { name="vector", dir="types" },
+    { name="robot_data", dir="types" },
+  },
+  
+  blocks = {
+    { name="myblock", file="examples/example_block.blx", src_dir="src" },
+    { name="myblock2", file="examples/example_block2.blx", src_dir="src2" },
+  },
+  
+  modules = {
+    { name="mylib", blocks={"myblock"} },
+    { name="anotherlib", blocks={"myblock2"} } ,
+  },
+}

@@ -6,7 +6,7 @@
    #+BEGIN_EXAMPLE
    $ git clone https://github.com/UbxTeam/microblx.git
    #+END_EXAMPLE
-   You might want to use the 'dev' branch.
+     You might want to use the 'dev' branch.
    #+BEGIN_EXAMPLE
    $ cd microblx
    microblx$ git checkout dev
@@ -15,17 +15,50 @@
    #+BEGIN_EXAMPLE
    $ git clone https://github.com/haianos/microblx_cmake.git
    #+END_EXAMPLE
-   You might also want to use the 'dev' branch here.
+     You might also want to use the 'dev' branch here.
    #+BEGIN_EXAMPLE
    $ cd microblx_cmake
    microblx_cmake$ git checkout dev
    #+END_EXAMPLE
    - Write a sourceme.sh file for yourself
-      
-** Generate the package
-#+BEGIN_EXAMPLE
-$ cat example_pkg.lue
+     This file needs to be sourced in every terminal session where you want to use ubx.
+   #+BEGIN_EXAMPLE
+   $ cat sourceme.sh
+   export UBX_ROOT=$HOME/microblx
+   source $UBX_ROOT/env.sh
+   export UBX_MODULES=$HOME/microblx/install/lib/ubx
+   export CMAKE_PREFIX_PATH=$HOME/microblx/install/share/ubx/cmake
+   #+END_EXAMPLE
+     You might want to put in your shell's startup script.
+     - bash:
+   #+BEGIN_EXAMPLE
+   $ echo 'source path/to/sourceme.sh' >> .bashrc
+   #+END_EXAMPLE
+     - zsh:
+   #+BEGIN_EXAMPLE
+   $ echo 'source path/to/sourceme.sh' >> .bashrc
+   #+END_EXAMPLE
+   - Make ubx.
+     To compile ubx, the sourceme.sh file has to be sourced.
+   #+BEGIN_EXAMPLE
+   $ source sourceme.sh
+   #+END_EXAMPLE
+     After that, just run make in the ubx directory.
+   #+BEGIN_EXAMPLE
+   $ cd microblx
+   microblx$ make # Don't use multiple core option -jn
+   #+END_EXAMPLE
 
+** Making a package
+   The process of making a package consists of the following steps.
+*** Design the model for the ubx package.
+    A package contains a set of blocks types.
+
+    To design the package model, write a package model ('.pkg') file.
+    Example:
+#+BEGIN_EXAMPLE
+$ cat example_pkg.pkg
+#+INCLUDE: "~/.emacs"
 #+END_EXAMPLE
    TODO
    
