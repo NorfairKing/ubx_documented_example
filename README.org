@@ -20,7 +20,8 @@ $ git clone https://github.com/haianos/microblx_cmake.git
 $ cd microblx_cmake
 microblx_cmake$ git checkout dev
 #+END_EXAMPLE
-
+   3. Write a sourceme.sh file for yourself
+      
 ** Generate the package
 #+BEGIN_EXAMPLE
 $ cat example_pkg.lue
