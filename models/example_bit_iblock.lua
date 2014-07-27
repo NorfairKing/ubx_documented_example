@@ -5,7 +5,7 @@ return block
       port_cache=true,
 
       types = {
-    -- No special types
+      -- No special types
       },
       
       configurations= {
@@ -15,7 +15,7 @@ return block
 
       ports = {
     -- define the ports for this block
-        { name="value", in_type_name ="bool", out_type_name="bool", doc="bit access port" },
+        { name="value", in_type_name ="int", out_type_name="int", doc="bit access port" },
       },
 
       -- define which operations this block implements

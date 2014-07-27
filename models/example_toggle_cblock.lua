@@ -13,7 +13,7 @@ return block
       },
 
       ports = {
-        { name="toggle", out_type_name="bool", doc="bit to toggle" },
+        { name="toggle", out_type_name="int", doc="bit to toggle" },
       },
       
       operations = { start=true, stop=true, step=true }

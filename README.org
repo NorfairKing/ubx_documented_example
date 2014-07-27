@@ -1,8 +1,30 @@
 * UBX example
-UNDER CONSTRUCTION
+  UNDER CONSTRUCTION
 ** Install ubx and ubx_cmake
+   0. Look at the [[https://github.com/UbxTeam/microblx][ubx readme]] to find out which dependencies there and install them on your system.
+   1. Install [[https://github.com/UbxTeam/microblx][ubx]].
+#+BEGIN_EXAMPLE
+$ git clone https://github.com/UbxTeam/microblx.git
+#+END_EXAMPLE
+   You might want to use the 'dev' branch.
+#+BEGIN_EXAMPLE
+$ cd microblx
+microblx$ git checkout dev
+#+END_EXAMPLE
+   2. Install [[https://github.com/haianos/microblx_cmake][ubx_cmake]].
+#+BEGIN_EXAMPLE
+$ git clone https://github.com/haianos/microblx_cmake.git
+#+END_EXAMPLE
+   You might also want to use the 'dev' branch here.
+#+BEGIN_EXAMPLE
+$ cd microblx_cmake
+microblx_cmake$ git checkout dev
+#+END_EXAMPLE
+
 ** Generate the package
 #+BEGIN_EXAMPLE
 $ cat example_pkg.lue
 
 #+END_EXAMPLE
+   TODO
+   
