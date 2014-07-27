@@ -59,7 +59,7 @@
 #+BEGIN_EXAMPLE
 $ cat example_pkg.pkg
 #+END_EXAMPLE
-#+INCLUDE: "~/.emacs"
+#+INCLUDE: "example_pkg.pkg"
 
    TODO
    
