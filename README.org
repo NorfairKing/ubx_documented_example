@@ -2,7 +2,7 @@
   UNDER CONSTRUCTION
 ** Install ubx and ubx_cmake
    - Look at the [[https://github.com/UbxTeam/microblx][ubx readme]] to find out which dependencies there and install them on your system.
-   - Install [[https://github.com/UbxTeam/microblx][ubx]].
+   - Install [[https://github.com/UbxTeam/microblx][microblx]].
    #+BEGIN_EXAMPLE
    $ git clone https://github.com/UbxTeam/microblx.git
    #+END_EXAMPLE
@@ -36,7 +36,7 @@
    #+END_EXAMPLE
      - zsh:
    #+BEGIN_EXAMPLE
-   $ echo 'source path/to/sourceme.sh' >> .bashrc
+   $ echo 'source path/to/sourceme.sh' >> .zshrc
    #+END_EXAMPLE
    - Make ubx.
      To compile ubx, the sourceme.sh file has to be sourced.
@@ -70,10 +70,11 @@ return pkg
   -- The name of the package
   name="example",
   
-  -- The path to >TODO<
-  path="../",
+  -- Optional: The path to the directory where the package will be generated
+  -- (No trailing slash)
+  path=".",
       
-  -- The dependencies of the package
+  -- Optional: The dependencies of the package
   -- These could be dependencies on other packages, blocks, types or libraries
   dependencies = {
     -- name: the name of the dependecy
@@ -84,7 +85,7 @@ return pkg
     { name="kdl-types", type="cmake" },
   },
   
-  -- The types that are used in the package
+  -- Optional: The types that are used in the package
   -- All types have to be declared, not only custom types. >TODO<
   -- >TODO< {Is it the name of the directory, a relative path or an absolute path?}
   types = {
@@ -116,6 +117,8 @@ return pkg
 #+END_EXAMPLE
     Note the comma's at the end of each item in a list.
     The last item can also have such a comma.
+
+    You can now *generate code for your package*.
     
 ** Creating an ubx system composition
 COMING SOON

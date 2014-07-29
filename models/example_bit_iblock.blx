@@ -4,13 +4,10 @@ return block
       meta_data="An iblock that handles one bit of information",
       port_cache=true,
 
-      types = {
-      -- No special types
-      },
       
       configurations= {
     -- define configuration data here. e.g. parameters to set at init
-        { name="initial_value" },
+        { name="initial_value", type_name="int" },
       },
 
       ports = {

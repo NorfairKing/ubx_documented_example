@@ -1,0 +1,18 @@
+# - Config file for the example package
+# It defines the following variables
+#  EXAMPLE_TYPES_INCLUDE_DIRS - include directories for example_types
+#  EXAMPLE_TYPES_LIBRARIES    - libraries to link against
+ 
+# Compute paths
+#get_filename_component(EXAMPLE_TYPES_CMAKE_DIR "${EXAMPLE_TYPES_CMAKE_DIR}" PATH)
+set(EXAMPLE_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+set(EXAMPLE_TYPES_CMAKE_DIR "@CONF_CMAKE_DIR@")
+
+
+# Our library dependencies (contains definitions for IMPORTED targets)
+if(NOT TARGET example AND NOT EXAMPLE_TYPES_BINARY_DIR)
+  include("${EXAMPLE_TYPES_CMAKE_DIR}/example-types-targets.cmake")
+endif()
+ 
+# These are IMPORTED targets created by example-types-targets.cmake
+set(EXAMPLE_TYPES_LIBRARIES example)
