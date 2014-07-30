@@ -1,3 +1,2 @@
-source ./sourceme.sh
 cd ../microblx_cmake
 ./generate_pkg.lua -s ../ubx_example/models/example_pkg.pkg

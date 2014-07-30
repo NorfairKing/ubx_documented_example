@@ -2,21 +2,19 @@ return pkg
 {
   name="example",
   
-  path="/home/syd/ubx_example",
+  path="/home/syd/ubx/example_pkg",
 
   types = {
   },  
     
   blocks = {
-    { name="bit", file="/home/syd/ubx_example/models/example_bit_iblock.blx", src_dir="src" },
-    { name="sequence", file="/home/syd/ubx_example/models/example_sequence_sblock.blx", src_dir="src" },
-    { name="toggle", file="/home/syd/ubx_example/models/example_toggle_cblock.blx", src_dir="src" },
+    { name="bit", file="/home/syd/ubx/ubx_example/models/example_bit_iblock.blx", src_dir="src" },
+    { name="toggle", file="/home/syd/ubx/ubx_example/models/example_toggle_cblock.blx", src_dir="src" },
   },
   
   -- The modules that the package provides
   modules = {
     { name="bit", blocks={"bit"} },
-    { name="sequence", blocks={"sequence"} } ,
     { name="toggle", blocks={"toggle"} } ,
   },
 }
