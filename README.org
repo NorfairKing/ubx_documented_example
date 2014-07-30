@@ -2,28 +2,37 @@
   UNDER CONSTRUCTION
 ** Install ubx and ubx_cmake
    - Look at the [[https://github.com/UbxTeam/microblx][ubx readme]] to find out which dependencies there and install them on your system.
-   - Install [[https://github.com/UbxTeam/microblx][microblx]].
+*** Workspace
+   - Make a ubx workspace directory.
    #+BEGIN_EXAMPLE
-   $ git clone https://github.com/UbxTeam/microblx.git
+   ~ $ mkdir ubx
+   ~ $ cd ubx
    #+END_EXAMPLE
-     You might want to use the 'dev' branch.
+*** [[https://github.com/UbxTeam/microblx][Microblx]]
    #+BEGIN_EXAMPLE
-   $ cd microblx
-   microblx$ git checkout dev
+   ~/ubx $ git clone https://github.com/UbxTeam/microblx.git
    #+END_EXAMPLE
-   - Install [[https://github.com/haianos/microblx_cmake][ubx_cmake]].
+   You might want to use the 'dev' branch.
    #+BEGIN_EXAMPLE
-   $ git clone https://github.com/haianos/microblx_cmake.git
+   ~/ubx $ cd microblx
+   ~/ubx/microblx $ git checkout dev
+   ~/ubx/microblx $ cd ..
+   #+END_EXAMPLE
+*** [[https://github.com/haianos/microblx_cmake][Ubx Cmake]].
+   #+BEGIN_EXAMPLE
+   ~/ubx$ git clone https://github.com/haianos/microblx_cmake.git
    #+END_EXAMPLE
      You might also want to use the 'dev' branch here.
    #+BEGIN_EXAMPLE
-   $ cd microblx_cmake
-   microblx_cmake$ git checkout dev
+   ~/ubx $ cd microblx_cmake
+   ~/ubx/microblx_cmake $ git checkout dev
+   ~/ubx/microblx_cmake $ cd ..
    #+END_EXAMPLE
+*** Sourceme.sh ifle
    - Write a sourceme.sh file for yourself
      This file needs to be sourced in every terminal session where you want to use ubx.
    #+BEGIN_EXAMPLE
-   $ cat sourceme.sh
+   ~/ubx $ cat sourceme.sh # TODO WORK THIS OUT BETTER
    export UBX_ROOT=$HOME/microblx
    source $UBX_ROOT/env.sh
    export UBX_MODULES=$HOME/microblx/install/lib/ubx
@@ -32,21 +41,21 @@
      You might want to put in your shell's startup script.
      - bash:
    #+BEGIN_EXAMPLE
-   $ echo 'source path/to/sourceme.sh' >> .bashrc
+   ~/ubx $ echo 'source path/to/sourceme.sh' >> .bashrc
    #+END_EXAMPLE
      - zsh:
    #+BEGIN_EXAMPLE
-   $ echo 'source path/to/sourceme.sh' >> .zshrc
+   ~/ubx $ echo 'source path/to/sourceme.sh' >> .zshrc
    #+END_EXAMPLE
-   - Make ubx.
-     To compile ubx, the sourceme.sh file has to be sourced.
+*** Compile microblx
+   To compile ubx, the sourceme.sh file has to be sourced.
    #+BEGIN_EXAMPLE
-   $ source sourceme.sh
+   ~/ubx $ source sourceme.sh
    #+END_EXAMPLE
-     After that, just run make in the ubx directory.
+   After that, just run make in the ubx directory.
    #+BEGIN_EXAMPLE
-   $ cd microblx
-   microblx$ make # Don't use multiple core option -jn
+   ~/ubx $ cd microblx
+   ~/ubx/microblx $ make # Don't use multiple core option -jn
    #+END_EXAMPLE
 
 ** Making a package
@@ -57,6 +66,8 @@
    4. Implement the types
    5. Implement the blocks
    6. Building with cmake
+*** Preliminaries
+
 *** Designing the package model.
     A package contains a set of blocks types.
 
@@ -117,6 +128,8 @@ return pkg
 #+END_EXAMPLE
     Note the comma's at the end of each item in a list.
     The last item can also have such a comma.
+
+    You can find a real example in the models subdirectory of this repository
 
     You can now *generate code for your package*.
     
