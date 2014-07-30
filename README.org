@@ -3,60 +3,68 @@
 ** Install ubx and ubx_cmake
    - Look at the [[https://github.com/UbxTeam/microblx][ubx readme]] to find out which dependencies there and install them on your system.
 *** Workspace
-   - Make a ubx workspace directory.
-   #+BEGIN_EXAMPLE
-   ~ $ mkdir ubx
-   ~ $ cd ubx
-   #+END_EXAMPLE
+    Make a ubx workspace directory.
+    #+BEGIN_EXAMPLE
+    ~ $ mkdir ubx
+    ~ $ cd ubx
+    #+END_EXAMPLE
 *** [[https://github.com/UbxTeam/microblx][Microblx]]
-   #+BEGIN_EXAMPLE
-   ~/ubx $ git clone https://github.com/UbxTeam/microblx.git
-   #+END_EXAMPLE
-   You might want to use the 'dev' branch.
-   #+BEGIN_EXAMPLE
-   ~/ubx $ cd microblx
-   ~/ubx/microblx $ git checkout dev
-   ~/ubx/microblx $ cd ..
-   #+END_EXAMPLE
-*** [[https://github.com/haianos/microblx_cmake][Ubx Cmake]].
-   #+BEGIN_EXAMPLE
-   ~/ubx$ git clone https://github.com/haianos/microblx_cmake.git
-   #+END_EXAMPLE
-     You might also want to use the 'dev' branch here.
-   #+BEGIN_EXAMPLE
-   ~/ubx $ cd microblx_cmake
-   ~/ubx/microblx_cmake $ git checkout dev
-   ~/ubx/microblx_cmake $ cd ..
-   #+END_EXAMPLE
+    #+BEGIN_EXAMPLE
+    ~/ubx $ git clone https://github.com/UbxTeam/microblx.git
+    #+END_EXAMPLE
+    You might want to use the 'dev' branch.
+    #+BEGIN_EXAMPLE
+    ~/ubx $ cd microblx
+    ~/ubx/microblx $ git checkout dev
+    ~/ubx/microblx $ cd ..
+    #+END_EXAMPLE
+*** [[https://github.com/haianos/microblx_cmake][Ubx Cmake]]
+    #+BEGIN_EXAMPLE
+    ~/ubx$ git clone https://github.com/haianos/microblx_cmake.git
+    #+END_EXAMPLE
+    You might also want to use the 'dev' branch here.
+    #+BEGIN_EXAMPLE
+    ~/ubx $ cd microblx_cmake
+    ~/ubx/microblx_cmake $ git checkout dev
+    ~/ubx/microblx_cmake $ cd ..
+    #+END_EXAMPLE
 *** Sourceme.sh ifle
-   - Write a sourceme.sh file for yourself
-     This file needs to be sourced in every terminal session where you want to use ubx.
-   #+BEGIN_EXAMPLE
-   ~/ubx $ cat sourceme.sh # TODO WORK THIS OUT BETTER
-   export UBX_ROOT=$HOME/microblx
-   source $UBX_ROOT/env.sh
-   export UBX_MODULES=$HOME/microblx/install/lib/ubx
-   export CMAKE_PREFIX_PATH=$HOME/microblx/install/share/ubx/cmake
-   #+END_EXAMPLE
-     You might want to put in your shell's startup script.
-     - bash:
-   #+BEGIN_EXAMPLE
-   ~/ubx $ echo 'source path/to/sourceme.sh' >> .bashrc
-   #+END_EXAMPLE
-     - zsh:
-   #+BEGIN_EXAMPLE
-   ~/ubx $ echo 'source path/to/sourceme.sh' >> .zshrc
-   #+END_EXAMPLE
+    Write a sourceme.sh file for yourself
+    This file needs to be sourced in every terminal session where you want to use ubx.
+    #+BEGIN_EXAMPLE
+    ~/ubx $ cat sourceme.sh # TODO WORK THIS OUT BETTER
+    export UBX_ROOT=$HOME/microblx
+    source $UBX_ROOT/env.sh
+    export UBX_MODULES=$HOME/microblx/install/lib/ubx
+    export CMAKE_PREFIX_PATH=$HOME/microblx/install/share/ubx/cmake
+    #+END_EXAMPLE
+    You might want to put in your shell's startup script.
+      - bash:
+      #+BEGIN_EXAMPLE
+      ~/ubx $ echo 'source path/to/sourceme.sh' >> .bashrc
+      #+END_EXAMPLE
+      - zsh:
+      #+BEGIN_EXAMPLE
+      ~/ubx $ echo 'source path/to/sourceme.sh' >> .zshrc
+      #+END_EXAMPLE
 *** Compile microblx
-   To compile ubx, the sourceme.sh file has to be sourced.
-   #+BEGIN_EXAMPLE
-   ~/ubx $ source sourceme.sh
-   #+END_EXAMPLE
-   After that, just run make in the ubx directory.
-   #+BEGIN_EXAMPLE
-   ~/ubx $ cd microblx
-   ~/ubx/microblx $ make # Don't use multiple core option -jn
-   #+END_EXAMPLE
+    To compile ubx, the sourceme.sh file has to be sourced.
+    #+BEGIN_EXAMPLE
+    ~/ubx $ source sourceme.sh
+    #+END_EXAMPLE
+    After that, just run make in the ubx directory.
+    #+BEGIN_EXAMPLE
+    ~/ubx $ cd microblx
+    ~/ubx/microblx $ make # Don't use multiple core option -jn
+    #+END_EXAMPLE
+*** Current situation
+    At this point, you ~/ubx directory should look like this:
+    #+BEGIN_EXAMPLE
+    ~/ubx
+    |- microblx
+    |- microblx_cmake
+    |- sourceme.sh
+    #+END_EXAMPLE
 
 ** Making a package
    The process of making a package consists of the following steps.
@@ -66,8 +74,6 @@
    4. Implement the types
    5. Implement the blocks
    6. Building with cmake
-*** Preliminaries
-
 *** Designing the package model.
     A package contains a set of blocks types.
 
