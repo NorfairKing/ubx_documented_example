@@ -31,12 +31,23 @@
 *** Sourceme.sh ifle
     Write a sourceme.sh file for yourself
     This file needs to be sourced in every terminal session where you want to use ubx.
+    | Variable          | Meaning                                                                 |
+    |-------------------+-------------------------------------------------------------------------|
+    | UBX_ROOT          | Points to the original microblx root path                               |
+    | UBX_MODULE        | Same as UBX_ROOT                                                        |
+    | UBX_MODULES       | Points to the dynamic library folder where the blocks will be installed |
+    |-------------------+-------------------------------------------------------------------------|
+    | UBX_MODELS        | Points to the models folder                                             |
+    | CMAKE_PREFIX_PATH | Not sure how to word this, look at the example                          |
+    |                   |                                                                         |
     #+BEGIN_EXAMPLE
     ~/ubx $ cat sourceme.sh # TODO WORK THIS OUT BETTER
-    export UBX_ROOT=$HOME/microblx
+    export UBX_ROOT=$HOME/ubx/microblx
+    export UBX_MODULE=$HOME/ubx/microblx
     source $UBX_ROOT/env.sh
-    export UBX_MODULES=$HOME/microblx/install/lib/ubx
-    export CMAKE_PREFIX_PATH=$HOME/microblx/install/share/ubx/cmake
+    export UBX_MODULES=$HOME/ubx/ubxinstall/lib/ubx
+    export CMAKE_PREFIX_PATH=$HOME/ubx/ubxinstall/share/ubx/cmake
+    export UBX_MODELS=$HOME/ubx/ubx_example/models
     #+END_EXAMPLE
     You might want to put in your shell's startup script.
       - bash:
