@@ -95,43 +95,42 @@ return pkg
   -- The name of the package
   name="example",
   
-  -- Optional: The path to the directory where the package will be generated
+  -- The path to the directory where the package will be generated (optional)
   -- (No trailing slash)
   path=".",
       
-  -- Optional: The dependencies of the package
+  -- The dependencies of the package (optional)
   -- These could be dependencies on other packages, blocks, types or libraries
   dependencies = {
     -- name: the name of the dependecy
-    -- type:
-    --   |- cmake: >TODO<
-    --   >TODO<
-    --
-    { name="kdl-types", type="cmake" },
+    -- type: a string represeting the type of dependency
+    --   |- cmake: >TODO< what does this mean?
+    -- required: whether or not the dependency is required
+    { name="dependencyname", type="cmake", required=true },
   },
   
-  -- Optional: The types that are used in the package
+  -- The types that are used in the package (optional)
   -- All types have to be declared, not only custom types. >TODO<
   -- >TODO< {Is it the name of the directory, a relative path or an absolute path?}
   types = {
     -- name: The name of the type
-    -- dir: The directory in which the type is declared
+    -- dir: The directory in which the type is declared (optional)
     { name="my_type", dir="types" },
     { name="vector", dir="types" },
     { name="robot_data", dir="types" },
   },
   
-  -- The blocks that are defined in the package
+  -- The blocks that are defined in the package (optional)
   blocks = {
     -- name: The name of the block
     -- file: The file in which the block is declared
-    -- src_dir: The source directory in which the code will be generated.
+    -- src_dir: The source directory in which the code will be generated. (optional)
     -- >TODO< {Is it the name of the directory, a relative path or an absolute path?}
     { name="myblock", file="examples/example_block.blx", src_dir="src" },
     { name="myblock2", file="examples/example_block2.blx", src_dir="src2" },
   },
   
-  -- The modules that the package provides
+  -- The modules that the package provides (optional)
   modules = {
     -- name: The name of the module
     -- blocks: The names of the blocks in the module
@@ -235,3 +234,4 @@ COMING SOON
 *** Designing the composition
 *** Creating a launch script
 *** Launch the application
+    
