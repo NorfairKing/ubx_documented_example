@@ -36,17 +36,14 @@
     | UBX_ROOT          | Points to the original microblx root path                               |
     | UBX_MODULE        | Same as UBX_ROOT                                                        |
     | UBX_MODULES       | Points to the dynamic library folder where the blocks will be installed |
-    |-------------------+-------------------------------------------------------------------------|
     | UBX_MODELS        | Points to the models folder                                             |
-    | CMAKE_PREFIX_PATH | Not sure how to word this, look at the example                          |
-    |                   |                                                                         |
+
     #+BEGIN_EXAMPLE
     ~/ubx $ cat sourceme.sh # TODO WORK THIS OUT BETTER
     export UBX_ROOT=$HOME/ubx/microblx
     export UBX_MODULE=$HOME/ubx/microblx
     source $UBX_ROOT/env.sh
     export UBX_MODULES=$HOME/ubx/ubxinstall/lib/ubx
-    export CMAKE_PREFIX_PATH=$HOME/ubx/ubxinstall/share/ubx/cmake
     export UBX_MODELS=$HOME/ubx/ubx_example/models
     #+END_EXAMPLE
     You might want to put in your shell's startup script.
@@ -81,14 +78,14 @@
    The process of making a package consists of the following steps.
    1. Design the model for the ubx package.
    2. Design the model for the blocks.
-   3. Generate the package.
+   3. Generate the code for the package.
    4. Implement the types
    5. Implement the blocks
    6. Building with cmake
 *** Designing the package model.
     A package contains a set of blocks types.
 
-    To design the package model, write a package model ('.pkg') file.
+    To design the package model, write a package model (.pkg) file.
     Example:
 
 #+BEGIN_EXAMPLE
@@ -144,12 +141,95 @@ return pkg
 }
 #+END_EXAMPLE
     Note the comma's at the end of each item in a list.
-    The last item can also have such a comma.
+    The last item can to have such a comma.
 
     You can find a real example in the models subdirectory of this repository
+*** Designing the block models
+**** Generic block
+     To design a block, write a block model file (.blx) file.
+     #+BEGIN_EXAMPLE
+     return block
+     {
+       -- The name of the block
+       name="blockname",
+       -- The metadata of the block (optional)
+       meta_data="metadata",
+       -- >TODO< what is port_cache for?
+       port_cache=true,
 
-    You can now *generate code for your package*.
+       -- The types used for this block (optional)
+       types = {
+         -- name: the name of the type
+         -- class: the class of the type
+         -- |- struct: Currently only structs are available
+         -- |- enum: NOT IMPLEMENTED YET
+         -- doc: A description of the type (optional)
+         { name="typename", class='struct', doc='description' }, -- Enum will follow once implemented in C
+         { name="configname2", class='struct', doc='description' }, -- Enum will follow once implemented in C
+       },
     
+       -- The configuration values for this block (optional)
+       configurations= {
+         -- name: the name of the type
+         -- type_name: the type of the config value
+         -- len: the size of an instance of the type (in bytes) (optional)
+         -- doc: a description of the documentation of the config value (optional)
+         { name="configname1", type_name="configtype", len=5 },
+         { name="configname2", type_name="struct configstructtype" },
+       },
+    
+       -- The ports for this block (optional)
+       ports = {
+         -- name: the name of the port
+         -- in_type_name: the type name for input data (optional)
+         -- in_data_len: the lenght (in bytes) for the input data type (optional)
+         -- in_type_name: the type name for output data (optional)
+         -- in_data_len: the lenght (in bytes) for the output data type (optional)
+         -- doc: a description of the port (optional)
+         { name="portname1", in_type_name="double", in_data_len=8, doc="description" },
+         { name="portname2", out_type_name="int", out_data_len=4 },
+       },
+          
+       -- The provided operations for this block
+       -- start: whether to provide a start function
+       -- stop: whether to provide a stop function
+       -- step: whether to provide a step function
+       operations = { start=true, stop=true, step=true }
+     }
+     #+END_EXAMPLE
+
+**** cblock
+     Not specifically implemented yet
+     - Model only one trigger, and have it be an input trigger.
+**** iblock
+     An iblock model differs in only one aspect: the operations field.
+     #+BEGIN_EXAMPLE
+     [...]
+       -- The provided operations for this block
+       -- read: whether to provide a read function
+       -- write: whether  to provide a write function
+       operations = { write=true, read=true}
+     [...]
+     #+END_EXAMPLE
+**** sblock
+     Not specifically implemented yet
+     - Model no ports
+*** Generating the code for your package
+
+
+*** Implement the types
+*** Implement the blocks
+*** Building and installing your package
+#+BEGIN_EXAMPLE
+CMAKE_BUILD_TYPE                                                                       
+CMAKE_INSTALL_PREFIX             /home/syd/ubx/ubxinstall                              
+INSTALL_BIN_APPS_DIR             bin                                                   
+INSTALL_CMAKE_DIR                share/ubx/cmake                                       
+INSTALL_INCLUDE_DIR              include/ubx                                           
+INSTALL_LIB_BLOCKS_DIR           lib/ubx/blocks                                        
+INSTALL_LIB_TYPES_DIR            lib/ubx/types                                         
+UBX_LIBRARY                      /home/syd/ubx/microblx/src/libubx.so
+#+END_EXAMPLE
 ** Creating an ubx system composition
 COMING SOON
 *** Designing the composition

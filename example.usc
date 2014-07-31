@@ -1,0 +1,16 @@
+return bd.system {
+   imports = {
+      "blocks/bit.so",
+      "blocks/toggle.so",
+   },
+
+   blocks = {
+      {name="bit", type="bit"},
+      {name="toggle", type="toggle"},
+   },
+
+   connections = {
+-- connect the cpp_sender block with the cpp_receiver block through a fifo block
+      {src="bit.value", tgt="toggle.toggle"},
+   },
+}
