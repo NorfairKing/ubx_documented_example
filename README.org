@@ -28,7 +28,7 @@
     ~/ubx/microblx_cmake $ git checkout dev
     ~/ubx/microblx_cmake $ cd ..
     #+END_EXAMPLE
-*** Sourceme.sh ifle
+*** Sourceme.sh file
     Write a sourceme.sh file for yourself
     This file needs to be sourced in every terminal session where you want to use ubx.
     | Variable          | Meaning                                                                 |
@@ -49,11 +49,11 @@
     You might want to put in your shell's startup script.
       - bash:
       #+BEGIN_EXAMPLE
-      ~/ubx $ echo 'source path/to/sourceme.sh' >> .bashrc
+      ~/ubx $ echo 'source ~/ubx/sourceme.sh' >> .bashrc
       #+END_EXAMPLE
       - zsh:
       #+BEGIN_EXAMPLE
-      ~/ubx $ echo 'source path/to/sourceme.sh' >> .zshrc
+      ~/ubx $ echo 'source ~/ubx/sourceme.sh' >> .zshrc
       #+END_EXAMPLE
 *** Compile microblx
     To compile ubx, the sourceme.sh file has to be sourced.
@@ -82,71 +82,82 @@
    4. Implement the types
    5. Implement the blocks
    6. Building with cmake
+      
+   You should use a seperate directory to model your package in.
+   #+BEGIN_EXAMPLE
+   $ cd ~/ubx
+   ~/ubx $ mkdir ubx_example
+   #+END_EXAMPLE
 *** Designing the package model.
-    A package contains a set of blocks types.
+    You should use a seperate directoy for the models.
+     #+BEGIN_EXAMPLE
+     $ cd ~/ubx/ubx_example
+     ~/ubx/ubx_example $ mkdir models
+     #+END_EXAMPLE
 
     To design the package model, write a package model (.pkg) file.
     Example:
 
-#+BEGIN_EXAMPLE
-$ cat example_pkg.pkg
-return pkg
-{
-  -- The name of the package
-  name="example",
-  
-  -- The path to the directory where the package will be generated (optional)
-  -- (No trailing slash)
-  path=".",
+    #+BEGIN_EXAMPLE
+    ~/ubx/ubx_example/models $ cat example_pkg.pkg
+    return pkg
+    {
+      -- The name of the package
+      name="example",
       
-  -- The dependencies of the package (optional)
-  -- These could be dependencies on other packages, blocks, types or libraries
-  dependencies = {
-    -- name: the name of the dependecy
-    -- type: a string represeting the type of dependency
-    --   |- cmake: >TODO< what does this mean?
-    -- required: whether or not the dependency is required
-    { name="dependencyname", type="cmake", required=true },
-  },
-  
-  -- The types that are used in the package (optional)
-  -- All types have to be declared, not only custom types. >TODO<
-  -- >TODO< {Is it the name of the directory, a relative path or an absolute path?}
-  types = {
-    -- name: The name of the type
-    -- dir: The directory in which the type is declared (optional)
-    { name="my_type", dir="types" },
-    { name="vector", dir="types" },
-    { name="robot_data", dir="types" },
-  },
-  
-  -- The blocks that are defined in the package (optional)
-  blocks = {
-    -- name: The name of the block
-    -- file: The file in which the block is declared
-    -- src_dir: The source directory in which the code will be generated. (optional)
-    -- >TODO< {Is it the name of the directory, a relative path or an absolute path?}
-    { name="myblock", file="examples/example_block.blx", src_dir="src" },
-    { name="myblock2", file="examples/example_block2.blx", src_dir="src2" },
-  },
-  
-  -- The modules that the package provides (optional)
-  modules = {
-    -- name: The name of the module
-    -- blocks: The names of the blocks in the module
-    { name="mylib", blocks={"myblock"} },
-    { name="anotherlib", blocks={"myblock2"} } ,
-  },
-}
-#+END_EXAMPLE
+      -- The path to the directory where the package will be generated (optional)
+      -- (No trailing slash)
+      path=".",
+          
+      -- The dependencies of the package (optional)
+      -- These could be dependencies on other packages, blocks, types or libraries
+      dependencies = {
+        -- name: the name of the dependecy
+        -- type: a string represeting the type of dependency
+        --   |- cmake: >TODO< what does this mean?
+        -- required: whether or not the dependency is required
+        { name="dependencyname", type="cmake", required=true },
+      },
+      
+      -- The types that are used in the package (optional)
+      -- All types have to be declared, not only custom types. >TODO<
+      -- >TODO< {Is it the name of the directory, a relative path or an absolute path?}
+      types = {
+        -- name: The name of the type
+        -- dir: The directory in which the type is declared (optional)
+        { name="my_type", dir="types" },
+        { name="vector", dir="types" },
+        { name="robot_data", dir="types" },
+      },
+      
+      -- The blocks that are defined in the package (optional)
+      blocks = {
+        -- name: The name of the block
+        -- file: The file in which the block is declared
+        -- src_dir: The source directory in which the code will be generated. (optional)
+        -- >TODO< {Is it the name of the directory, a relative path or an absolute path?}
+        { name="myblock", file="examples/example_block.blx", src_dir="src" },
+        { name="myblock2", file="examples/example_block2.blx", src_dir="src2" },
+      },
+      
+      -- The modules that the package provides (optional)
+      modules = {
+        -- name: The name of the module
+        -- blocks: The names of the blocks in the module
+        { name="mylib", blocks={"myblock"} },
+        { name="anotherlib", blocks={"myblock2"} } ,
+      },
+    }
+    #+END_EXAMPLE
     Note the comma's at the end of each item in a list.
     The last item can to have such a comma.
 
-    You can find a real example in the models subdirectory of this repository
+    You can find a real example in the models subdirectory of this repositor
 *** Designing the block models
 **** Generic block
      To design a block, write a block model file (.blx) file.
      #+BEGIN_EXAMPLE
+     ~/ubx/ubx_example/models $ cat example_block.blx
      return block
      {
        -- The name of the block
@@ -214,7 +225,27 @@ return pkg
      Not specifically implemented yet
      - Model no ports
 *** Generating the code for your package
-
+    You can now generate the code for your package from the package- and block models.
+    At this point, your '~/ubx' directory should look like this:
+   
+    #+BEGIN_EXAMPLE
+    ~/ubx
+    |- microblx
+    |- microblx_cmake
+    |- ubx_example         # This is your package
+    |  |- models
+    |    |- example_pkg.pkg
+    |    |- example_block1.blx
+    |    |- example_block2.blx
+    |- sourceme.sh
+    #+END_EXAMPLE
+ 
+    #+BEGIN_EXAMPLE
+    $ cd ~/ubx/microblx_cmake
+    ~/ubx/microblx_cmake $ ./generate_pkg.lua -s ~ubx/ubx_example/models/example.pkg
+    #+END_EXAMPLE
+    
+    You can add a '-d' option to this command, and specify a directoy, to override the 'path' option in the package model
 
 *** Implement the types
 *** Implement the blocks
