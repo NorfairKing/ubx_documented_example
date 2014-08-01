@@ -107,7 +107,7 @@
       
       -- The path to the directory where the package will be generated (optional)
       -- (No trailing slash)
-      path=".",
+      path="~/ubx/example_pkg",
           
       -- The dependencies of the package (optional)
       -- These could be dependencies on other packages, blocks, types or libraries
@@ -217,7 +217,7 @@
      [...]
        -- The provided operations for this block
        -- read: whether to provide a read function
-       -- write: whether  to provide a write function
+       -- write: whether to provide a write function
        operations = { write=true, read=true}
      [...]
      #+END_EXAMPLE
@@ -242,27 +242,100 @@
  
     #+BEGIN_EXAMPLE
     $ cd ~/ubx/microblx_cmake
-    ~/ubx/microblx_cmake $ ./generate_pkg.lua -s ~ubx/ubx_example/models/example.pkg
+    ~/ubx/microblx_cmake $ ./generate_pkg.lua -s ~/ubx/ubx_example/models/example.pkg -d ~/ubx/example_pkg_clean
     #+END_EXAMPLE
-    
-    You can add a '-d' option to this command, and specify a directoy, to override the 'path' option in the package model
+
+    The '-s' option specifies the (.pkg) package model file.
+    You can (optionally) provide a '-d' option to this command, and specify a directoy, to override the 'path' option in the package model.
+
+    I added '_clean' to the generation path, so that we can regenerate the files without writing over the code we have implemented.
+    Your '~/ubx' directory should now look like this:
+    #+BEGIN_EXAMPLE
+    ~/ubx
+    |- microblx
+    |- microblx_cmake
+    |- ubx_example         # This is your package
+    |  |- models
+    |     |- example_pkg.pkg
+    |     |- example_block1.blx
+    |     |- example_block2.blx
+    |- sourceme.sh
+    |- example_pkg_clean
+       |- cmake...
+       |- types...
+       |- src
+       |  |- blockname.h
+       |  |- blockname.c
+       |  |- blockname.usc
+       |- modules...
+       |- models...
+       |- CMakeLists.txt
+    #+END_EXAMPLE
+    You should copy the example_pkg_clean directory so that it won't be overridden when you regenerate code.
+    #+BEGIN_EXAMPLE
+    ~/ubx $ cp -r example_pkg_clean example_pkg
+    #+END_EXAMPLE
 
 *** Implement the types
+    We currently haven't specified any types. In the directory where the package code is generated
+    >TODO< what to implement, precicely.
 *** Implement the blocks
+    Have a look at the ".h" and ".c" files in the 'src' directory of your package.
+    >TODO< what to implement, precicely.
 *** Building and installing your package
-#+BEGIN_EXAMPLE
-CMAKE_BUILD_TYPE                                                                       
-CMAKE_INSTALL_PREFIX             /home/syd/ubx/ubxinstall                              
-INSTALL_BIN_APPS_DIR             bin                                                   
-INSTALL_CMAKE_DIR                share/ubx/cmake                                       
-INSTALL_INCLUDE_DIR              include/ubx                                           
-INSTALL_LIB_BLOCKS_DIR           lib/ubx/blocks                                        
-INSTALL_LIB_TYPES_DIR            lib/ubx/types                                         
-UBX_LIBRARY                      /home/syd/ubx/microblx/src/libubx.so
-#+END_EXAMPLE
+    To build your package, make a build directory in your package directory.
+    #+BEGIN_EXAMPLE
+    $ cd ~/ubx/example_pkg
+    ~/ubx/example_pkg $ mkdir build
+    ~/ubx/example_pkg $ cd build
+    #+END_EXAMPLE
+    At this point, you can execute cmake in the above directory.
+    #+BEGIN_EXAMPLE
+    ~/ubx/example_pkg/build $ cmake ../
+    #+END_EXAMPLE
+    Next, execute ccmake to configure your makefile.
+    #+BEGIN_EXAMPLE
+    ~/ubx/example_pkg/build $ ccmake ../
+    #+END_EXAMPLE
+    You will see a very minimal 'GUI' in your terminal.
+    If everything is okay, you should see something like this:
+    #+BEGIN_EXAMPLE
+    CMAKE_BUILD_TYPE                                                                                                                                                           
+    CMAKE_INSTALL_PREFIX             /usr/local                                                                                                                                
+    INSTALL_BIN_APPS_DIR             bin                                                                                                                                       
+    INSTALL_CMAKE_DIR                share/ubx/cmake                                                                                                                           
+    INSTALL_INCLUDE_DIR              include/ubx                                                                                                                               
+    INSTALL_LIB_BLOCKS_DIR           lib/ubx/blocks                                                                                                                            
+    INSTALL_LIB_TYPES_DIR            lib/ubx/types                                                                                                                             
+    UBX_LIBRARY                      /home/user/ubx/microblx/src/libubx.so
+    #+END_EXAMPLE
+    Note the UBX_LIBRARY variable.
+    You should now change the CMAKE_INSTALL_PREFIX to the value of your UBX_MODULES, but without the '/lib/ubx/' in the end.
+    Select the CMAKE_INSTALL_PREFIX value with the arrow keys, press enter to change it, enter again when you're done.
+    Now press 'c' to configure, then 'g'.
+    #+BEGIN_EXAMPLE
+    CMAKE_BUILD_TYPE                                                                       
+    CMAKE_INSTALL_PREFIX             /home/user/ubx/ubxinstall                              
+    INSTALL_BIN_APPS_DIR             bin                                                   
+    INSTALL_CMAKE_DIR                share/ubx/cmake                                       
+    INSTALL_INCLUDE_DIR              include/ubx                                           
+    INSTALL_LIB_BLOCKS_DIR           lib/ubx/blocks                                        
+    INSTALL_LIB_TYPES_DIR            lib/ubx/types                                         
+    UBX_LIBRARY                      /home/user/ubx/microblx/src/libubx.so
+    #+END_EXAMPLE
+    You're now ready to build the package.
+    #+BEGIN_EXAMPLE
+    ~/ubx/example_pkg/build $ make
+    #+END_EXAMPLE
+    Finally, install the package
+    #+BEGIN_EXAMPLE
+    ~/ubx/example_pkg/build $ make install
+    #+END_EXAMPLE
+    
 ** Creating an ubx system composition
 COMING SOON
 *** Designing the composition
+
 *** Creating a launch script
 *** Launch the application
     

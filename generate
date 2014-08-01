@@ -1,2 +1,2 @@
 cd ../microblx_cmake
-./generate_pkg.lua -s ../ubx_example/models/example_pkg.pkg
+./generate_pkg.lua -s ~/ubx/ubx_example/models/example_pkg.pkg -d ~/ubx/example_pkg_clean

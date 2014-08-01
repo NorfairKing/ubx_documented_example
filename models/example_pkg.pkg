@@ -2,7 +2,7 @@ return pkg
 {
   name="example",
   
-  path="/home/syd/ubx/example_pkg",
+  path="/home/syd/ubx/example_pkg_clean",
 
   types = {
   },  
