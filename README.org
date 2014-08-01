@@ -51,11 +51,11 @@
       #+BEGIN_EXAMPLE
       ~/ubx $ echo 'source ~/ubx/sourceme.sh' >> .bashrc
       #+END_EXAMPLE
-      - zsh:
-      #+BEGIN_EXAMPLE
-      ~/ubx $ echo 'source ~/ubx/sourceme.sh' >> .zshrc
-      #+END_EXAMPLE
 *** Compile microblx
+    Note: if you redefine 'cd' at any point in your setup, or are using zsh instead of bash, please use a seperate bash session from here on.
+    #+BEGIN_EXAMPLE
+    $ sh
+    #+END_EXAMPLE
     To compile ubx, the sourceme.sh file has to be sourced.
     #+BEGIN_EXAMPLE
     ~/ubx $ source sourceme.sh
