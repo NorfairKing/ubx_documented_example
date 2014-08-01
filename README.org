@@ -378,6 +378,20 @@
     }
     #+END_EXAMPLE
 *** Creating a launch script
-    
+    To make the launching of the composition easier, you can make a launch script.
+    #+BEGIN_EXAMPLE
+    ~/ubx/ubx_example $ cat run.sh
+    #!/bin/bash
+    exec $UBX_ROOT/tools/ubx_launch -webif 8888 -c ~/ubx/ubx_example/example.usc
+    #+END_EXAMPLE
+    Don't forget to make the script runnable:
+    #+BEGIN_EXAMPLE
+    ~/ubx/ubx_example $ chmod +x run.sh
+    #+END_EXAMPLE
 *** Launch the application
+    To launch the application, running the launch script should be all you have to do.
+    #+BEGIN_EXAMPLE
+    ~/ $ ~/ubx/ubx_example/run.sh
+    #+END_EXAMPLE
+    You can now use your browser to look at http://localhost:8888.
     
