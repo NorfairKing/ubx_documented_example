@@ -333,9 +333,51 @@
     #+END_EXAMPLE
     
 ** Creating an ubx system composition
-COMING SOON
 *** Designing the composition
+    To design a microblx system composition, you have to write a microblocks system composition (.usc) file.
+    #+BEGIN_EXAMPLE
+    return bd.system {
+       -- The imports that are required for the composition.
+       imports = {
+          -- The standard imports
+          "std_types/stdtypes/stdtypes.so",
+          "std_blocks/ptrig/ptrig.so",
+          "std_blocks/lfds_buffers/lfds_cyclic.so",
+          "std_blocks/hexdump/hexdump.so",
 
+          -- Your own blocks
+          "blocks/exampleblock.so",
+       },
+    
+       -- The blocks _instances_ that are used in the composition.
+       blocks = {
+          -- name: the name of the block instance
+          -- type: the block type (that is defined).
+          -- note: 'type' does _not_ mean iblock, sblock or cblock.
+          {name="block1", type="exampleblock"},
+          {name="iblock1", type="exampleiblock"},
+       },
+    
+       -- The port connections in the composition.
+       connections = {
+          -- src: the 'from' of the connection
+          -- tgt: the 'to' of the composition
+          -- note: use a dot to specify a specific port of a block.
+          {src="exampleblock.output", tgt="iblock1"},
+          {src="iblock1", tgt="exampleblock.input"},
+       },
+     
+       -- The configurations of the blocks in the composition.
+       configurations = {
+          -- name: the name of the block to configure
+          -- config: a list of config values for the block.
+          { name="fifo1", config={type_name="struct cpp_data", buffer_len=1}},
+          { name="ptrig1", config={period={sec=1,usec=0}, trig_blocks={{b="#cpp_sender1", num_steps=1, measure=0},
+                                                                       {b="#cpp_receiver1", num_steps=1, measure=0}}}}
+       },
+    }
+    #+END_EXAMPLE
 *** Creating a launch script
+    
 *** Launch the application
     
